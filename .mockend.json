@@ -1,6 +1,6 @@
 {
   "Task": {
     "name" : {"string": {} },
-    "checked" : {"boolean": false}
+    "checked" : {"boolean": {}}
   }
 }
