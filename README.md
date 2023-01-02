@@ -2,6 +2,8 @@
 
 Um web app para gerenciar as suas atividades. O sistema deve permitir cadastrar, listar,  visualizar, alterar e excluir tarefas.
 
+![FireShot Capture 020 - AppTodo - michaelcrds github io](https://user-images.githubusercontent.com/61437530/210280534-df4abed0-5343-4c73-9ee1-5fe0e093dd80.png)
+
 ### Tecnologias
 
 - Angular
