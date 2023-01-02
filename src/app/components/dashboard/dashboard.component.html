@@ -13,16 +13,16 @@
         </div>
       </div>
 
-      <div class="bg-light rounded" style="overflow-y:auto; height: 70vh">
-        <div class="m-3" *ngFor="let task of taskArr">
+      <div class="bg-light rounded" style="overflow-y:auto; height: 70vh" *ngIf="taskArr.length > 0; else emptyList">
+        <div class="m-3" *ngFor="let task of taskArr, index as i">
           <div class="p-2 shadow">
             <div class="align-items-center input-group row ps-3">
-              <input type="checkbox" class="col" [(ngModel)]="task.checked" (click)="editCheckbox(task)">
+              <input type="checkbox" class="col" [(ngModel)]="task.checked" (click)="editCheckbox(i, task)">
               <p class="col-8 m-0" [ngClass]="{'checked':task.checked}">{{task.name}}</p>
-              <button class="btn col" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="callModal(task)">
+              <button class="btn col" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="callModal(i, task)">
                 <i class="fa-regular fa-pen-to-square"></i>
               </button>
-              <button class="btn col" (click)="deleteTask(task)">
+              <button class="btn col" (click)="deleteTask(i)">
                 <i class="fa-solid fa-trash"></i>
               </button>
             </div>
@@ -52,3 +52,11 @@
     <div class="col"></div>
   </div>
 </div>
+<ng-template #emptyList>
+  <div class="bg-light rounded" style="overflow-y:auto; height: 70vh">
+    <div class="emptyList">
+      <i class="fa-solid fa-list"></i>
+      <h3>Sua lista de tarefas está vazia!</h3>
+    </div>
+  </div>
+</ng-template>

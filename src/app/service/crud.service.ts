@@ -1,34 +1,38 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Task } from '../model/task';
-import {Observable} from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
 })
 export class CrudService {
-  serviceUrl : string;
+  taskArr : Task[] = [];
 
   constructor(
     private http:HttpClient,
   ) {
-    this.serviceUrl = "https://my-json-server.typicode.com/michaelcrds/app-todo/tasks";
+
   }
 
-  addTask(task : Task) : Observable<Task> {
-    return this.http.post<Task>(this.serviceUrl, task);
+  addTask(task : Task){
+    this.taskArr.push(task);
+    localStorage.setItem('tasks', JSON.stringify(this.taskArr))
   }
 
-  getAllTasks() : Observable<Task[]> {
-    return this.http.get<Task[]>(this.serviceUrl);
+  getAllTasks() : Task[] {
+    this.taskArr = JSON.parse(localStorage.getItem('tasks') || '[]');
+    return this.taskArr;
   }
 
-  deleteTask(task : Task) : Observable<Task> {
-    return this.http.delete<Task>(this.serviceUrl + '/' + task.id);
+  deleteTask(index : number){
+    console.log(index)
+    this.taskArr.splice(index, 1);
+    localStorage.setItem('tasks', JSON.stringify(this.taskArr))
   }
 
-  editTask(task : Task) : Observable<Task> {
-    return this.http.put<Task>(this.serviceUrl + '/' + task.id, task);
+  editTask(index: number, task : Task){
+    this.taskArr[index] = task;
+    localStorage.setItem('tasks', JSON.stringify(this.taskArr))
   }
 
 }

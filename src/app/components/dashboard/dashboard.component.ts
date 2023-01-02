@@ -10,17 +10,19 @@ import { CrudService } from 'src/app/service/crud.service';
 })
 export class DashboardComponent implements OnInit {
 
-  taskObj : Task = new Task();
-  taskArr : Task[] = [];
+  taskObj: Task = new Task();
+  taskIndex: any = '';
+  taskArr: Task[] = [];
 
-  newTaskValue : string = '';
-  editTaskValue : string = '';
+  newTaskValue: string = '';
+  editTaskValue: string = '';
 
   constructor(
-    private crudService : CrudService,
-  ){}
+    private crudService: CrudService,
+  ) { }
 
   ngOnInit(): void {
+    this.taskIndex = '';
     this.newTaskValue = '';
     this.editTaskValue = '';
     this.taskObj = new Task();
@@ -28,52 +30,44 @@ export class DashboardComponent implements OnInit {
     this.getAllTask();
   }
 
-  getAllTask(){
-    this.crudService.getAllTasks().subscribe({
-      next: (res) => this.taskArr = res,
-      error: (err) => alert("Não foi possível carregar tarefas!"),
-    })
+  getAllTask() {
+    this.taskArr = this.crudService.getAllTasks();
   }
 
   addTask(){
     this.newTaskValue = this.newTaskValue.trim();
     if(this.newTaskValue){
       this.taskObj.name = this.newTaskValue;
-      this.crudService.addTask(this.taskObj).subscribe({
-        next: (res) => this.ngOnInit(),
-        error: (err) => alert(err),
-        complete: () => this.newTaskValue = ''
-      })
+      this.crudService.addTask(this.taskObj);
+      this.ngOnInit()
     }
   }
 
   editTask(){
-    this.taskObj.name = this.editTaskValue;
-    this.crudService.editTask(this.taskObj).subscribe({
-      next: (res) => this.ngOnInit(),
-      error: (err) => alert("Ocorreu um erro ao editar a tarefa!"),
-    })
+    if(!this.editTaskValue){
+      alert('Você não pode salvar uma tarefa em branco!')
+    }else{
+      this.taskObj.name = this.editTaskValue;
+      this.crudService.editTask(this.taskIndex, this.taskObj);
+      this.ngOnInit();
+    }
   }
 
-  deleteTask(task:Task){
-    this.crudService.deleteTask(task).subscribe({
-      next: (res) => this.ngOnInit(),
-      error: (err) => alert("Erro ao excluir tarefa!"),
-    })
+  deleteTask(index: number){
+    this.crudService.deleteTask(index);
+    this.ngOnInit();
   }
 
-  callModal(task: Task){
+  callModal(index:number, task: Task){
+    this.taskIndex = index;
     this.taskObj = task;
     this.editTaskValue = this.taskObj.name;
   }
 
-  editCheckbox(task: Task){
+  editCheckbox(index:number, task: Task){
+    this.taskIndex = index;
     this.taskObj = task
     this.taskObj.checked = !task.checked
-    this.crudService.editTask(this.taskObj).subscribe({
-      next: (res) => this.taskObj = new Task(),
-      error: (err) => alert("Ocorreu um erro ao editar a tarefa!"),
-    })
-
+    this.crudService.editTask(this.taskIndex, this.taskObj)
   }
 }
