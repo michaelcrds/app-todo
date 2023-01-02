@@ -1,27 +1,39 @@
-# AppTodo
+# Visão Geral do Projeto
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.2.
+Um web app para gerenciar as suas atividades. O sistema deve permitir cadastrar, listar,  visualizar, alterar e excluir tarefas.
 
-## Development server
+### Tecnologias
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Angular
+- TypeScript
+- HTML5
+- SCSS
+- Bootstrap			 
 
-## Code scaffolding
+### Clonando o Repositório
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Primeiro é preciso que efetue a clonagem do repositório para o seu computador para assim efetuar alterações de código. Mas antes de clonar o repositório é importante que realize um **fork**, ou seja, criar uma cópia do mesmo para o seu github. Para isso basta subir a página e clicar no botão de mesmo nome e aguardar alguns minutos. Depois basta clicar em **clone or download** e copiar a URL do respositório.
 
-## Build
+Já abrindo o bash do Git para efetuar a clonagem será necessário que digite a seguinte linha de código e informe a URL copiada anteriormente:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```
+git clone <url-do-repositorio>
+```
 
-## Running unit tests
+### Instalando as Dependências
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Para instalar as dependências do projeto basta abrir o **Prompt de Comando do Node.js** (caso você esteja no linux, basta utilizar o terminal), acessar a pasta do repositório e inserir o seguinte comando:
 
-## Running end-to-end tests
+```
+npm install
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Servidor de Desenvolvimento
 
-## Further help
+Basicamente você deverá escrever seu código e enquanto você efetua alterações no arquivo é necessário deixar o comando abaixo rodando:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```
+ng serve
+```
+
+O código irá rodar o plugin **serve**, dessa forma gerando um servidor para o desenvolvimento (`http://localhost:4200`) sendo assim toda alteração de código nos arquivos de origem irá recarregar automaticamente a página.
